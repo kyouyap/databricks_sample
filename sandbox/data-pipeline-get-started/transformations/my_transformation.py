@@ -1,6 +1,5 @@
 # Import modules
 import dlt
-import spark
 from pyspark.sql.functions import *  # noqa: F403
 from pyspark.sql.types import (
   DoubleType,
