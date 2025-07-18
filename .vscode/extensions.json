@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "databricks.databricks",
+        "github.copilot",
+        "anthropic.claude-code",
+        "saoudrizwan.claude-dev",
+        "ms-python.mypy-type-checker",
+        "charliermarsh.ruff"
+    ]
+}

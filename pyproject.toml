@@ -1,0 +1,190 @@
+[project]
+name = "databricks-sample"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11.9"
+dependencies = [
+    "databricks-connect==15.1.3",
+    "databricks-sdk==0.59.0",
+    "google-auth==2.40.3",
+    "googleapis-common-protos==1.70.0",
+    "grpcio==1.73.1",
+    "grpcio-status==1.73.1",
+    "idna==3.10",
+    "numpy==1.26.4",
+    "packaging==25.0",
+    "pandas==2.3.1",
+    "protobuf==6.31.1",
+    "py4j==0.10.9.7",
+    "pyarrow==21.0.0",
+    "pyasn1==0.6.1",
+    "pyasn1-modules==0.4.2",
+    "python-dateutil==2.9.0.post0",
+    "pytz==2025.2",
+    "requests==2.32.4",
+    "rsa==4.9.1",
+    "six==1.17.0",
+    "tzdata==2025.2",
+    "urllib3==2.5.0",
+    "cachetools==5.5.2",
+    "certifi==2025.7.14",
+    "charset-normalizer==3.4.2",
+    "nbformat==5.10.4",
+    "attrs==25.3.0",
+    "fastjsonschema==2.21.1",
+    "jsonschema==4.24.1",
+    "jsonschema-specifications==2025.4.1",
+    "jupyter-core==5.8.1",
+    "platformdirs==4.3.8",
+    "referencing==0.36.2",
+    "rpds-py==0.26.0",
+    "traitlets==5.14.3",
+    "typing-extensions==4.14.1",
+    "ipykernel>=6.29.5",
+    "pyspark>=3.5.6",
+    "spark>=0.2.1",
+    "dlt>=1.14.1",
+]
+
+
+[dependency-groups]
+dev = [
+    "databricks-dlt>=0.3.0",
+    "delta-spark>=3.3.2",
+    "mypy>=1.17.0",
+    "ruff>=0.12.4",
+    "ty>=0.0.1a14",
+]
+
+[tool.ruff]
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+]
+
+# Same as Black.
+line-length = 88
+indent-width = 4
+
+[tool.ruff.lint]
+# Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+]
+ignore = [
+    "COM812",
+    "COM819",
+    "D100",
+    "D203",
+    "D213",
+    "D300",
+    "E111",
+    "E114",
+    "E117",
+    "ISC001",
+    "ISC002",
+    "Q000",
+    "Q001",
+    "Q002",
+    "Q003",
+    "W191",
+    "F405",
+]
+
+fixable = ["ALL"]
+unfixable = []
+
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.format]
+quote-style = "double"
+
+indent-style = "space"
+
+skip-magic-trailing-comma = false
+
+line-ending = "auto"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["INP001", "S101"]
+
+[tool.mypy]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "dlt"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "dlt"
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+pythonpath = "src"
+testpaths = ["test"]
+python_files = ["test_*.py"]
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise NotImplementedError",
+    "raise AssertionError",
+    "if __name__ == .__main__.:"
+]
+# omit = ["src/main.py"]
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=8.3.2",
+    "pre-commit>=3.8.0",
+    "ruff>=0.6.3",
+    "mypy>=1.15.0",
+    "pytest-cov>=6.0.0",
+    "pytest-mock>=3.14.0",
+    "pytest-skip-slow>=0.0.5",
+    "pytest-subtests>=0.14.1",
+    "coverage>=7.6.12",
+    "types-aiofiles>=24.1.0.20241221",
+    "pytest-asyncio>=0.25.3",
+    "requests-mock>=1.12.1",
+    "pytest-xdist>=3.6.1",
+]

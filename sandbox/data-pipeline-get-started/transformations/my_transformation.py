@@ -1,10 +1,17 @@
 # Import modules
 import dlt
-from pyspark.sql.functions import *
-from pyspark.sql.types import DoubleType, IntegerType, StringType, StructType, StructField
+import spark
+from pyspark.sql.functions import *  # noqa: F403
+from pyspark.sql.types import (
+  DoubleType,
+  IntegerType,
+  StringType,
+  StructField,
+  StructType,
+)
 
 # Define the path to the source data
-file_path = f"/databricks-datasets/songs/data-001/"
+file_path = "/databricks-datasets/songs/data-001/"
 
 # Define a streaming table to ingest data from a volume
 schema = StructType(
@@ -33,7 +40,10 @@ schema = StructType(
 )
 
 @dlt.table(
-  comment="Raw data from a subset of the Million Song Dataset; a collection of features and metadata for contemporary music tracks."
+  comment=(
+    "Raw data from a subset of the Million Song Dataset; "
+    "a collection of features and metadata for contemporary music tracks."
+  )
 )
 def songs_raw():
   return (spark.readStream
@@ -55,12 +65,25 @@ def songs_prepared():
   return (
     spark.read.table("songs_raw")
       .withColumnRenamed("title", "song_title")
-      .select("artist_id", "artist_name", "duration", "release", "tempo", "time_signature", "song_title", "year")
+      .select(
+        "artist_id",
+        "artist_name",
+        "duration",
+        "release",
+        "tempo",
+        "time_signature",
+        "song_title",
+        "year"
+      )
   )
 
-# Define a materialized view that has a filtered, aggregated, and sorted view of the data
+# Define a materialized view that has a filtered, aggregated, \
+# and sorted view of the data
 @dlt.table(
-  comment="A table summarizing counts of songs released by the artists who released the most songs each year."
+  comment=(
+    "A table summarizing counts of songs released by the artists "
+    "who released the most songs each year."
+  )
 )
 def top_artists_by_year():
   return (
